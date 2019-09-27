@@ -5,9 +5,9 @@ connection.start
 
 channel = connection.create_channel
 
-queue1 = channel.queue("postoffice.grecia", :auto_delete => true)
-queue2 = channel.queue("postoffice.lady", :auto_delete => true)
-queue3 = channel.queue("postoffice.alvaro", :auto_delete => true)
+queue1 = channel.queue("postoffice.grecia", :auto_delete => false)
+queue2 = channel.queue("postoffice.lady", :auto_delete => false)
+queue3 = channel.queue("postoffice.alvaro", :auto_delete => false)
 
 exchange = channel.default_exchange
 
