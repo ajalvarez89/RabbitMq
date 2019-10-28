@@ -12,12 +12,12 @@ channel.queue("test_rabbit", :exclusive => true).bind(exchange, :routing_key => 
   puts "ON THE TOPICS POLITICS, #{payload}, routing key => #{info.routing_key}"
 end
 
-channel.queue("", :exclusive => true).bind(exchange, :routing_key => "#.internetgovernance.cybercrime").
+channel.queue("test_rabbit2", :exclusive => true).bind(exchange, :routing_key => "#.internetgovernance.cybercrime").
   subscribe do |info, metadata, payload|
   puts "ON THE TOPIC OF INTERNET GOVERNANCE, #{payload}, routing key => #{info.routing_key}"
 end
 
-channel.queue("", :exclusive => true).bind(exchange, :routing_key => "world.politics.intergovernance.*").
+channel.queue("test_rabbit3", :exclusive => true).bind(exchange, :routing_key => "world.politics.intergovernance.*").
   subscribe do |info, metadata, payload|
   puts "ON THE TOPICS OF THE WORLD, POLITICS, AND INTERNET GOVERNANCE #{payload}, routing key => #{info.routing_key}"
 end
