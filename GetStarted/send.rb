@@ -9,7 +9,9 @@ channel = connection.create_channel
 
 queue = channel.queue('hello')
 
-channel.default_exchange.publish('Hello World Alvaro!', routing_key: queue.name)
+payload = 'Hello World Alvaro!'
+
+channel.default_exchange.publish(payload, routing_key: queue.name)
 puts " [x] Sent 'Hello World!' for the quote: #{queue.name}"
 
 connection.close
