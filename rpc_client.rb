@@ -2,6 +2,7 @@
 #!/usr/bin/env ruby
 require 'bunny'
 require 'thread'
+require 'byebug'
 
 class FibonacciClient
   attr_accessor :call_id, :response, :lock, :condition, :connection,
@@ -18,10 +19,9 @@ class FibonacciClient
     setup_reply_queue
   end
 
-  def call(n)
+  def call(value)
     @call_id = generate_uuid
-
-    exchange.publish(n.to_s,
+    exchange.publish(value.to_s,
                      routing_key: server_queue_name,
                      correlation_id: call_id,
                      reply_to: reply_queue.name)

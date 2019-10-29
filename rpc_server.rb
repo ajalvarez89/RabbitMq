@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'bunny'
+require 'byebug'
 
 class FibonacciServer
   def initialize
@@ -31,9 +32,10 @@ class FibonacciServer
   attr_reader :channel, :exchange, :queue, :connection
 
   def subscribe_to_queue
+    
     queue.subscribe do |_delivery_info, properties, payload|
       result = fibonacci(payload.to_i)
-
+      
       exchange.publish(
         result.to_s,
         routing_key: properties.reply_to,
@@ -41,7 +43,7 @@ class FibonacciServer
       )
     end
   end
-
+ #how does fibonacci work?
   def fibonacci(value)
     return value if value.zero? || value == 1
 
@@ -50,6 +52,7 @@ class FibonacciServer
 end
 
 begin
+  byebug
   server = FibonacciServer.new
 
   puts ' [x] Awaiting RPC requests'
